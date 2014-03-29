@@ -7,6 +7,7 @@ class RBACSeeder extends Seeder {
 
     public function run()
     {
+        Eloquent::unguard();
         Role::create(array('name' => 'default'));
     }
 
