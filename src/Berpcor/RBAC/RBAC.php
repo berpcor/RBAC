@@ -115,6 +115,9 @@ class RBAC implements RBACInterface
         if(count($user)==0){
             throw new \Exception('Пользователь с указанным ID не найден.');
         }
+        if($user->role_id==1){
+            throw new \Exception('У пользователя уже назначена базовая роль без специальных разрешений.');
+        }
         $user->role_id = 'default';
         $user->save();
         return true;
@@ -124,6 +127,9 @@ class RBAC implements RBACInterface
         $user = User::find($user_id);
         if(count($user)==0){
             throw new \Exception('Пользователь с указанным ID не найден.');
+        }
+        if($user->role_id==1){
+            throw new \Exception('У пользователя уже назначена базовая роль без специальных разрешений.');
         }
         $user->role_id = 'default';
         $user->save();
