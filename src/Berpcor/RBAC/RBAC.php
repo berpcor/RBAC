@@ -104,6 +104,7 @@ class RBAC implements RBACInterface
             throw new \Exception('Роли с указанным ID не найдено.');
         }
         $user->role_id = $role_id;
+        $user->save();
         return true;
     }
 
