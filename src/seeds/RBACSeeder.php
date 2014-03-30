@@ -8,7 +8,7 @@ class RBACSeeder extends Seeder {
     public function run()
     {
         Eloquent::unguard();
-        Role::create(array('name' => 'default'));
+        Role::create(array('name' => 'default','description'=>'Стандартная роль, назначаемая пользователю по умолчанию. Запрещает совершение всех запрещенных действий.'));
     }
 
 }
