@@ -168,7 +168,7 @@ class RBAC implements RBACInterface
     public static function filterMethod(){
 
         if (!Auth::check()){
-            App::abort(404);
+            return false;
         }
         $action = Route::currentRouteAction();
 
@@ -193,18 +193,15 @@ class RBAC implements RBACInterface
 
             if ($user->role->permissions->isEmpty()){
                 //return 'Нет разрешения';
-                if (Request::ajax())
-                {
-                    $data = array('error'=>'Пользователь не имеет разрешения на доступ.');
-                }else {
-                   App::abort(404); 
-                }
+                return false;
                 
             }
             else {
                 //return 'Есть разрешение';
+                return true;
             }
         }
+        return true;
 
     } 
 
