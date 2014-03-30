@@ -163,7 +163,7 @@ class RBAC implements RBACInterface
         }
     } 
 
-    public static function filterFunction(){
+    public static function filterMethod(){
 
         if (!Auth::check()){
             App::abort(404);
