@@ -117,6 +117,7 @@ class RBAC implements RBACInterface
         }
         $user->role_id = 'default';
         $user->save();
+        return true;
     }
 
     public static function setDefaultRoleFor($user_id){
@@ -126,6 +127,7 @@ class RBAC implements RBACInterface
         }
         $user->role_id = 'default';
         $user->save();
+        return true;
     } 
     public static function attachPermissionToRole($role_id, $permission_id){
         if($role_id==1){
@@ -144,7 +146,7 @@ class RBAC implements RBACInterface
 
             $role->permissions()->attach($k);
         }
-        
+        return true;
 
     } 
     public static function hasPermission($action){
