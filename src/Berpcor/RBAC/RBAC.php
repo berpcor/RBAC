@@ -81,7 +81,7 @@ class RBAC implements RBACInterface
     public static function deletePermission($id){
         $count = count(Permission::find($id)->roles()->get());
         if($count>0){
-            throw new \Exception('Нельзя удалить разрешение до тех пор пока оно принадлежит хоть одной роли.');
+            throw new \Exception('Нельзя удалить разрешение до тех пор пока оно принадлежит хоть одной роли. Чтобы удалить разрешение, нужно отвязать его ото всех ролей.');
         }
         $permission = Permission::destroy($id);
         // Put permissions in cache for 24 hours
