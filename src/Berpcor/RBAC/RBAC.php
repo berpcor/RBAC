@@ -5,6 +5,8 @@ use User;
 use Role;
 use Permission;
 use Auth;
+use Cache;
+use Route;
 
 /**
 * RBAC - Laravel 4 RBAC
