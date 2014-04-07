@@ -10,11 +10,11 @@
 
 2. Запустить миграции. 
 ```shell
-  php artisan migrate --bench="berpcor/rbac"
+  php artisan migrate --package="berpcor/rbac"
 ```
 3. Добавить в config/app.php сервис-провайдер
 ```php
-  'Berpcor\RBAC\RBACServiceProvider'
+  'Berpcor\RBAC\RBACServiceProvider',
 ```
 4. Добавить в модель User
 ```php
