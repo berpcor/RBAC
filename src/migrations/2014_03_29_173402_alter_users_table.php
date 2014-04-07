@@ -12,6 +12,7 @@ class AlterUsersTable extends Migration {
 	 */
 	public function up()
 	{
+		DB::table('roles')->insert(array('name' => 'default','description'=>'Стандартная роль, назначаемая пользователю по умолчанию. Запрещает совершение всех запрещенных действий.'));
 		Schema::table('users', function($table)
 		{
 		    $table->integer('role_id')->unsigned()->index();
