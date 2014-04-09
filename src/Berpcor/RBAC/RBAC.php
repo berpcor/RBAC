@@ -118,7 +118,7 @@ class RBAC implements RBACInterface
         if($user->role_id==1){
             throw new \Exception('У пользователя уже назначена базовая роль без специальных разрешений.');
         }
-        $user->role_id = 'default';
+        $user->role_id = 1;
         $user->save();
         return true;
     }
@@ -131,7 +131,7 @@ class RBAC implements RBACInterface
         if($user->role_id==1){
             throw new \Exception('У пользователя уже назначена базовая роль без специальных разрешений.');
         }
-        $user->role_id = 'default';
+        $user->role_id = 1;
         $user->save();
         return true;
     } 
