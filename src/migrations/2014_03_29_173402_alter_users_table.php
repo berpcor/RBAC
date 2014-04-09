@@ -12,7 +12,8 @@ class AlterUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		DB::table('roles')->insert(array('name' => 'default','description'=>'Стандартная роль, назначаемая пользователю по умолчанию. Запрещает совершение всех запрещенных действий.'));
+		DB::table('roles')->insert(array('name' => 'Стандартная','description'=>'Стандартная роль, назначаемая пользователю по умолчанию. Запрещает совершение всех запрещенных действий.'));
+		DB::table('roles')->insert(array('name' => 'Суперпользователь','description'=>'Роль, для которой нет запретов.'));
 		Schema::table('users', function($table)
 		{
 		    $table->integer('role_id')->unsigned()->index();
