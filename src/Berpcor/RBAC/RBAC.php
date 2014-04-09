@@ -43,6 +43,9 @@ class RBAC implements RBACInterface
         if($id==1){
             throw new \Exception('Нельзя удалить базовую роль.');
         }
+        if($id==2){
+            throw new \Exception('Нельзя удалять суперпользователя.');
+        }
         $count = User::where('role_id','=',$id)->count();
         if($count>0){
             throw new \Exception('Данная роль назначена одному или нескольким пользователям. Для того, чтобы удалить данную роль, нужно отвязать ее у всех пользователей.');
@@ -139,6 +142,9 @@ class RBAC implements RBACInterface
         if($role_id==1){
             throw new \Exception('Базовой роли нельзя назначать пермишены.');
         }
+        if($role_id==2){
+            throw new \Exception('Нельзя редактировать разрешения суперпользователя.');
+        }
         $count = Role::where('id','=',$role_id)->count();
         if($count==0){
             throw new \Exception('Указанной роли не найдено.');
@@ -160,16 +166,22 @@ class RBAC implements RBACInterface
         if (!Auth::check()){
             return false;
         }
-        $user = User::with(array('role.permissions' => function($query) use ($action) {
-            $query->where('action','=',$action);
-        }))->where('id','=', Auth::user()->id)->first();
-
-        if ($user->role->permissions->isEmpty()){
-            //return 'Нет разрешения';
-            return false;
+        // Для суперпользователя
+        if(Auth::user()->role_id==2){
+            return true;
         }
         else {
-            return true;
+            $user = User::with(array('role.permissions' => function($query) use ($action) {
+              $query->where('action','=',$action);
+            }))->where('id','=', Auth::user()->id)->first();
+
+            if ($user->role->permissions->isEmpty()){
+              //return 'Нет разрешения';
+              return false;
+            }
+            else {
+              return true;
+            }  
         }
     } 
 
