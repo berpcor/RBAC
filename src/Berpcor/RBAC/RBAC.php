@@ -190,6 +190,10 @@ class RBAC implements RBACInterface
         if (!Auth::check()){
             return false;
         }
+        // Superuser
+        if(Auth::user()->role_id==2){
+            return true;
+        }
         $action = Route::currentRouteAction();
 
         if (Cache::has('permissions'))
